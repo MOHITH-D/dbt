@@ -6,4 +6,14 @@ sources:
     schema: jaffle_shop
     tables:
       - name: customers
+        freshness: null
+        
       - name: orders
+        freshness: 
+          error_after:
+            count: 6
+            period: hour
+          warn_after:
+            count: 3
+            period: day
+        
