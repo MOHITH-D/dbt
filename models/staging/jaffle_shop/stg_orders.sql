@@ -1,8 +1,12 @@
-{{
-    config(
-        materialized='incremental'
-    )
-}}
+{{ config(
+    materialized='incremental',
+    incremental_strategy='insert_overwrite',
+    partition_by={
+        "field": "order_date",
+        "data_type": "date"
+    }
+) }}
+
 
 select
     id as order_id,
@@ -13,5 +17,5 @@ select
 from {{source('jaffle_shop','orders')}}
 
 {% if is_incremental() %}
-    where order_date >= (select max(order_date) from {{ this }}) 
+    WHERE order_date >= DATEADD(DAY, -7, DATE '2018-04-04')
 {% endif %}
