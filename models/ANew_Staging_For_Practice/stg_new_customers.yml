@@ -7,4 +7,3 @@ sources:
     tables:
       - name: raw_customers
       - name: raw_items
-      
