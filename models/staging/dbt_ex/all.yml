@@ -12,3 +12,9 @@ sources:
       - name: partsupp
       - name: region
       - name: supplier
+
+  - name: updated_timestamp
+    database: ex
+    schema: dbt_md
+    tables:
+      - name: dbt_ex_customer

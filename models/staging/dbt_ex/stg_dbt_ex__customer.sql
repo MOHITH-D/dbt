@@ -1,9 +1,6 @@
 with 
-
 source as (
-
     select * from {{ source('dbt_ex', 'customer') }}
-
 ),
 
 customers as (

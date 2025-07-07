@@ -43,4 +43,4 @@ models:
     First_exercise:
       materialized: table
     staging:
-      materialized: table
+      +materialized: table
