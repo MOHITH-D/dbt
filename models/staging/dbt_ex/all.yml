@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+ - name: dbt_ex
+   database: SNOWFLAKE_SAMPLE_DATA
+   schema: TPCH_SF1
+   tables:
+    - name: customer
+    - name: lineItem
+    - name: nation
+    - name: orders
+    - name: part
+    - name: partsupp
+    - name: region
+    - name: supplier
