@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: dbt_ex
+    database: Analytics
+    schema: dbt_md
+    tables:
+      - name: raw_city
+      - name: raw_item

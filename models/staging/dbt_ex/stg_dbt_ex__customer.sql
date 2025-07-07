@@ -6,7 +6,7 @@ source as (
 
 ),
 
-renamed as (
+customers as (
 
     select
         c_custkey,
@@ -22,4 +22,4 @@ renamed as (
 
 )
 
-select * from renamed
+select * from customers
