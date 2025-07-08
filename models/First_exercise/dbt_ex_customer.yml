@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: dbt_ex_customer
+    description: >
+      This model creates a cleaned and enriched version of the customer data
+      by joining raw customer data with relevant staging models. It may include 
+      updated timestamps and tracking information necessary for analytics or snapshotting.
+    columns:
+      - name: c_custkey
+        description: Unique identifier for each customer.
+      - name: c_name
+        description: Full name of the customer.
+      - name: c_address
+        description: Customer's address information.
+      - name: c_phone
+        description: Customer's contact phone number.
+      - name: updated_timestamp
+        description: Timestamp of the latest update for the customer record.
