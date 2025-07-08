@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: src_customer
+    description: "Description of your model"
+    columns:
+      - name: last_updated
+        description: "The date when the record was last updated"
+        tests:
+          - valid_date  
