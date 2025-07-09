@@ -15,7 +15,6 @@ renamed as (
         n_comment
 
     from source
-
 )
 
 select * from renamed
