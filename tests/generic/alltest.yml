@@ -7,4 +7,12 @@ models:
       - name: last_updated
         description: "The date when the record was last updated"
         tests:
-          - valid_date  
+          - valid_date
+          - reconcile_row_count:
+              source_model: dbt_ex_customer
+              source_key: customer_id
+              target_key: customer_id
+
+          
+
+
