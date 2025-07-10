@@ -8,3 +8,6 @@ sources:
       - name: raw_customers
       - name: raw_items
       - name: raw_orders
+      - name: raw_products
+      - name: raw_stores
+      - name: raw_suppliers
