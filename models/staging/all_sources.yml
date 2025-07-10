@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    database: practice
+    schema: DBT_MD_PUBLIC
+    tables:
+      - name: raw_customers
+      - name: raw_Items
+      - name: raw_orders
+      - name: raw_products
+      - name: raw_stores
+      - name: raw_suppliers
+
