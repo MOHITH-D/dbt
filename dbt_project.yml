@@ -44,3 +44,6 @@ models:
       materialized: table
     staging:
       +materialized: table
+
+vars:
+  target_country: 1
