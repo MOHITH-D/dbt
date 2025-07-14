@@ -15,7 +15,7 @@ models:
           - not_null
           - relationships:
               field: patient_id
-              to: ref('stg_raw_patients')
+              to: ref('stg_raw__patients')
 
       - name: doctor_key
         description: "doctor identifier and it has an duplicate values."
@@ -23,7 +23,7 @@ models:
           - not_null
           - relationships:
               field: doctor_id
-              to: ref('stg_raw_doctors')
+              to: ref('stg_raw__doctors')
 
       - name: appointment_date
         description: "Date of the appointment."
