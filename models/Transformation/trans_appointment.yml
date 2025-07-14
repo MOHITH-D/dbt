@@ -30,7 +30,7 @@ models:
         tests:
           - not_null
           - dbt_utils.expression_is_true:
-              expression: " between '2023-01-01' AND '2024-12-31'"
+              expression: " between '2023-01-01' AND '2024-01-01'"
 
       - name: appointment_time
         description: "Time of the appointment."
