@@ -1,0 +1,51 @@
+version: 2
+models:
+  - name: trans_appointments
+    description: appointment table transmission and the format test are made.
+    columns:
+      - name: appointment_id
+        description: primary key for this table.
+        tests:
+          - unique
+          - not_null
+      - name: patient_id
+        description: patient identifier and it act as an foreign key so it has an duplicate values.
+        tests:
+          - not_null
+          - relationships:
+              field: patient_id
+              to: ref('stg_raw_patients')
+      - name: doctor_id
+        description: doctor identifier and it has an duplicate values.
+        tests:
+          - not_null
+          - relationships:
+              field: doctor_id
+              to: ref('stg_raw_doctors')
+      - name: appointment_date
+        description: "Date of the appointment."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true: 
+              expression: "TRY_CAST(appointment_date AS DATE) IS NOT NULL"
+          - dbt_utils.expression_is_true: 
+              expression: "appointment_date >= '2023-01-01' AND appointment_date <= '2024-12-31'" 
+
+      - name: appointment_time
+        description: "Time of the appointment."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "TRY_CAST(appointment_time AS TIME) IS NOT NULL"
+
+      - name: reason_for_visit
+        description: "Reason for the patient's visit."
+        tests:
+          - not_null
+
+      - name: status
+        description: "Current status of the appointment."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Scheduled', 'Completed', 'Cancelled', 'No-show']
