@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: trans_doctor
+    columns:
+      - name: doctor_key
+        description: "primary key for this table."
+        tests:
+          - unique
+          - not_null
+
+      - name: phone_number
+        description: "Phone number of the doctor with consists of 10 digits."
+        tests:
+          - not_null
+          #need to add an test case
+      - name: email
+        description: "Doctor's email must follow the format: dr.first_name.last_name@hospital.com"
+        tests:
+          - not_null
+          #need to add an tes case

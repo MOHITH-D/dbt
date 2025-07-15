@@ -1,0 +1,37 @@
+version: 2
+models:
+  - name: trans_billing
+    description: "transformation of billing table."
+    columns:
+      - name: bill_key
+        description: "primary key for this table."
+        tests:
+          - unique
+          - not_null
+
+      - name: patient_key
+        description: "It is an foreign key."
+        tests:
+          - not_null
+          - relationships:
+              field: patient_id
+              to: ref('stg_raw__patients')
+
+      - name: treatment_key
+        description: "It is an table ref from the treatment column."
+        tests:
+          - not_null
+          - relationships:
+              field: treatment_id
+              to: ref('stg_raw__treatments')
+
+      - name: bill_date
+        description: "We have the data on the year 2023."
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: " between '2023-01-01' AND '2024-01-01'"
+
+      - name: amount
+        description: "Total amount for the patients"
+        tests:
+          - not_null

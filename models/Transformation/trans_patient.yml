@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: trans_patient
+    columns:
+      - name: patient_id
+        description: "primary key"
+        tests:
+          - unique
+          - not_null
+          
+      - name: contact_number
+        description: "Patient's 10-digit contact number"
+        tests:
+          - not_null
+          #need to add an test case
+
+      #need to add an email test case
+          
