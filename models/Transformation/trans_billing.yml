@@ -32,6 +32,20 @@ models:
               expression: " between '2023-01-01' AND '2024-01-01'"
 
       - name: amount
-        description: "Total amount for the patients"
+        description: "Total amount for the patients."
         tests:
           - not_null
+
+      - name: payment_method
+        description: "On which payment method they are paying the amount."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Insurance', 'Credit Card', 'Cash']
+
+      - name: payment_status
+        description: "status of payment they paid the amount or the amount has to be paid or the amount is failed can be seen."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Paid','Pending','Failed']
