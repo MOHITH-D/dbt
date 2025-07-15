@@ -4,35 +4,35 @@
     )
 }}
 
-WITH appointments AS (
-    SELECT
+with appointments as (
+    select
         patient_key,
-        COUNT(*) AS total_appointments,
-        COUNT(CASE WHEN status = 'No-show' THEN 1 END) AS no_show_count,
-        MIN(appointment_date) AS first_appointment_date,
-        MAX(appointment_date) AS last_appointment_date
-    FROM {{ ref('fact_appointment') }}
-    GROUP BY patient_key
+        COUNT(*) as total_appointments,
+        COUNT(case when status = 'No-show' then 1 end) as no_show_count,
+        MIN(appointment_date) as first_appointment_date,
+        MAX(appointment_date) as last_appointment_date
+    from {{ ref('fact_appointment') }}
+    group by patient_key
     order by patient_key asc
 ),
 
-billing AS (
-    SELECT
+billing as (
+    select
         patient_key,
-        SUM(amount) AS total_billed,
-        SUM(CASE WHEN payment_status = 'Paid' THEN amount ELSE 0 END) AS total_paid
-    FROM {{ ref('fact_billing') }}
-    GROUP BY patient_key
+        SUM(amount) as total_billed,
+        SUM(case when payment_status = 'Paid' then amount else 0 end) as total_paid
+    from {{ ref('fact_billing') }}
+    group by patient_key
 )
 
-SELECT
-    COALESCE(a.patient_key, b.patient_key) AS patient_key,
-    COALESCE(total_appointments, 0) AS total_appointments,
-    COALESCE(total_billed, 0) AS total_billed,
-    COALESCE(total_paid, 0) AS total_paid,
-    COALESCE(no_show_count, 0) AS no_show_count,
+select
+    COALESCE(a.patient_key, b.patient_key) as patient_key,
+    COALESCE(total_appointments, 0) as total_appointments,
+    COALESCE(total_billed, 0) as total_billed,
+    COALESCE(total_paid, 0) as total_paid,
+    COALESCE(no_show_count, 0) as no_show_count,
     a.first_appointment_date,
     a.last_appointment_date
-FROM appointments a
+from appointments a
 FULL OUTER JOIN billing b
   ON a.patient_key = b.patient_key
