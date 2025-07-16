@@ -4,16 +4,37 @@ models:
   - name: trans_patient
     columns:
       - name: patient_id
-        description: "primary key"
+        description: "primary key for this table."
         tests:
           - unique
           - not_null
-          
-      - name: contact_number
-        description: "Patient's 10-digit contact number"
-        tests:
-          - not_null
-          #need to add an test case
 
-      #need to add an email test case
+      - name: first_name
+        description: "patients first_name."
           
+      - name: last_name
+        description: "Patients last_name."
+
+      - name: gender
+        description: "Patients gender can be seen here M/F."
+      
+      - name: date_of_birth
+        description: "Patients DOB."
+
+      - name: contact_number
+        description: "Patient's 10-digit contact number and i am testing it in test folder."
+
+      - name: address
+        description: "Customer given address."
+      
+      - name: registration_date
+        description: "On which date patient registered there details."
+
+      - name: insurance_provider
+        description: "Who is the insurance provider for the customer."
+
+      - name: insurance_number
+        description: "Patients insurance number."
+      
+      - name: email
+        description: "Patients email address."

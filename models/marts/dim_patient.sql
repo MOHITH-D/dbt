@@ -8,7 +8,7 @@
 
 with pat as(
     select 
-        {{dbt_utils.generate_surrogate_key(['patient_id','contact_number','insurance_number'])}} as sug_key_patient,
+        sug_key_patient,
         patient_id,
         first_name,
         last_name,

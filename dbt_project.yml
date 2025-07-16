@@ -35,5 +35,11 @@ clean-targets:         # directories to be removed by `dbt clean`
 # continue to be built as views. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 
+models:
+  my_new_project:  # replace with your actual project name
+    pre-hook: 
+      - "{{ set_start_time() }}"
+    post-hook:
+      - "{{ log_post_run_status() }}"
 
   
