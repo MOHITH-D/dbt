@@ -5,6 +5,7 @@
     unique_key='sug_key_patient',
     strategy='check',
     check_cols=['contact_number', 'insurance_provider'],
+    tags = 'patients'
   )
 }}
 

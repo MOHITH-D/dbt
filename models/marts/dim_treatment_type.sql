@@ -2,7 +2,8 @@
     config(
         schema='marts',
         materialized='incremental',
-        unique_key='treatment_id'
+        unique_key='treatment_id',
+        tags='treatments'
     )
 }}
 

@@ -1,6 +1,7 @@
 {{
     config(
-        schema='transform'
+        schema='transform',
+        tags='treatments'
     )
 }}
 select

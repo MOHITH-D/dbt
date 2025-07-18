@@ -1,6 +1,7 @@
 {{
     config(
-        schema='staging'
+        schema='staging',
+        tags = 'patients'
     )
 }}
 with 
