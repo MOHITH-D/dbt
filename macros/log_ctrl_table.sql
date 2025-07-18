@@ -1,4 +1,4 @@
-{% macro ctrl_log_model(control_table = 'DBT_HOSPITAL.CONTROL_TABLE' )%}
+{% macro ctrl_log_model(control_table = 'CTRL_TAB' )%}
  
     {% set run_started_at = context.get('run_started_at') %}
     {% set run_ended_at = modules.datetime.datetime.utcnow() %}
@@ -9,7 +9,7 @@
         run_ended_at.timestamp() - run_started_at.timestamp()
     ) | round(2) %}
  
-    insert into {{ control_table }} (
+    insert into DBT_HOSPITAL.CONTROL_TABLE.{{ control_table }} (
         model_name,
         status,
         run_started_at,
@@ -31,7 +31,7 @@
  
  
  
-{% macro ctrl_log_results(results, control_table='DBT_HOSPITAL.CONTROL_TABLE') %}
+{% macro ctrl_log_results(results, control_table='CTRL_TAB') %}
  
     {% set run_started_at = context.get('run_started_at') %}
     {% set run_ended_at = modules.datetime.datetime.utcnow() %}
@@ -42,7 +42,7 @@
         {% set status = result.status %}
         {% set run_duration = result.execution_time | default(0) %}
  
-        insert into {{ control_table }} (
+        insert into dbt_hospital.CONTROL_TABLE.{{ control_table }} (
             model_name,
             status,
             run_started_at,
