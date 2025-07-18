@@ -174,7 +174,7 @@ models:
     description: |
       Fact table capturing billing information for patient treatments including amounts and payment status.
     columns:
-      - name: billing_id
+      - name: bill_key
         description: Unique identifier for the billing record.
         tests:
           - unique
@@ -183,7 +183,7 @@ models:
         description: Foreign key to the patient dimension.
         tests:
           - not_null
-      - name: treatment_id
+      - name: treatment_key
         description: Foreign key to the treatment dimension.
         tests:
           - not_null
