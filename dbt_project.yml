@@ -38,8 +38,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   my_new_project:  # replace with your actual project name
     pre-hook: 
-      - "{{ set_start_time() }}"
+      - "{{ ctrl_log_model() }}"
     post-hook:
-      - "{{ log_post_run_status() }}"
+      - "{{ ctrl_log_results() }}"
 
   
