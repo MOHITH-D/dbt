@@ -1,0 +1,243 @@
+version: 2
+
+models:
+  - name: dim_doctors
+    description: |
+      This dimension table contains doctor details including their specialization, contact information, years of experience, and hospital branch.
+    columns:
+      - name: doctor_id
+        description: Unique identifier for each doctor.
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: Doctor's first name.
+        tests:
+          - not_null
+      - name: last_name
+        description: Doctor's last name.
+        tests:
+          - not_null
+      - name: specialization
+        description: Doctor's medical specialization.
+        tests:
+          - not_null
+      - name: phone_number
+        description: Contact phone number.
+        tests:
+          - not_null
+      - name: years_experience
+        description: Number of years the doctor has been practicing.
+        tests:
+          - not_null
+      - name: hospital_branch
+        description: Branch of the hospital where the doctor works.
+        tests:
+          - not_null
+      - name: email
+        description: Doctor's email address.
+        tests:
+          - not_null
+      - name: last_updated_date
+        description: Timestamp of the last update to the doctor's record.
+        tests:
+          - not_null
+
+  - name: dim_patient
+    description: |
+      Patient dimension with personal, contact, and insurance details. Uses snapshot metadata for SCD Type 2 tracking of changes.
+    columns:
+      - name: patient_id
+        description: Unique patient identifier.
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: Patient's first name.
+        tests:
+          - not_null
+      - name: last_name
+        description: Patient's last name.
+        tests:
+          - not_null
+      - name: gender
+        description: Patient's gender.
+        tests:
+          - not_null
+      - name: date_of_birth
+        description: Patient's date of birth.
+        tests:
+          - not_null
+      - name: contact_number
+        description: Patient's phone number.
+        tests:
+          - not_null
+      - name: address
+        description: Patient's home address.
+        tests:
+          - not_null
+      - name: insurance_provider
+        description: Name of the patient's insurance provider.
+        tests:
+          - not_null
+      - name: insurance_number
+        description: Insurance policy number.
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: Patient's email address.
+        tests:
+          - not_null
+      - name: registration_date
+        description: Date when the patient registered.
+        tests:
+          - not_null
+      - name: effective_start_date
+        description: Snapshot start date indicating when this record version became effective.
+        tests:
+          - not_null
+      - name: effective_end_date
+        description: Snapshot end date indicating when this record version expired.
+        tests:
+          - not_null
+      - name: is_current
+        description: Flag indicating if this is the current record version ('Y' or 'N').
+        tests:
+          - not_null
+
+  - name: dim_treatment_type
+    description: |
+      Dimension table describing types of treatments including cost ranges and last update date.
+    columns:
+      - name: treatment_id
+        description: Surrogate key generated from treatment type abbreviation and sequence.
+        tests:
+          - unique
+          - not_null
+      - name: treatment_type
+        description: Type or category of treatment.
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Chemotherapy', 'MRI', 'ECG', 'Physiotherapy', 'X-Ray']
+      - name: description
+        description: Detailed description of the treatment.
+        tests:
+          - not_null
+      - name: cost_range
+        description: Range of costs for the treatment in the format "min-max".
+        tests:
+          - not_null
+      - name: last_updated
+        description: Timestamp of the latest update for the treatment type.
+        tests:
+          - not_null
+
+  - name: fact_appointment
+    description: |
+      Fact table recording patient appointments including doctor, date, time, status, and reason for visit.
+    columns:
+      - name: appointment_key
+        description: Unique identifier for the appointment.
+        tests:
+          - unique
+          - not_null
+      - name: patient_key
+        description: Foreign key linking to the patient dimension.
+        tests:
+          - not_null
+      - name: doctor_key
+        description: Foreign key linking to the doctor dimension.
+        tests:
+          - not_null
+      - name: appointment_date
+        description: Date of the appointment.
+        tests:
+          - not_null
+      - name: appointment_time
+        description: Time of the appointment.
+        tests:
+          - not_null
+      - name: reason_for_visit
+        description: Reason or purpose of the appointment.
+        tests:
+          - not_null
+      - name: status
+        description: Status of the appointment (e.g., Completed, No-show, Cancelled).
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Completed', 'No-show', 'Cancelled']
+
+  - name: fact_billing
+    description: |
+      Fact table capturing billing information for patient treatments including amounts and payment status.
+    columns:
+      - name: bill_key
+        description: Unique identifier for the billing record.
+        tests:
+          - unique
+          - not_null
+      - name: patient_key
+        description: Foreign key to the patient dimension.
+        tests:
+          - not_null
+      - name: treatment_key
+        description: Foreign key to the treatment dimension.
+        tests:
+          - not_null
+      - name: bill_date
+        description: Date when the billing was issued.
+        tests:
+          - not_null
+      - name: amount
+        description: Total amount billed.
+        tests:
+          - not_null
+      - name: payment_method
+        description: Method used for payment (e.g., Cash, Insurance, Credit Card).
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Cash','Insurance','Credit Card']
+      - name: payment_status
+        description: Payment status (e.g., Paid, Pending, Failed).
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Paid','Pending','Failed']
+
+  - name: fact_patientActivity
+    description: |
+      Aggregated fact table summarizing patient activity with appointment counts, billing totals, and no-show counts.
+    columns:
+      - name: patient_key
+        description: Foreign key linking to the patient dimension.
+        tests:
+          - unique
+          - not_null
+      - name: total_appointments
+        description: Total number of appointments for the patient.
+        tests:
+          - not_null
+      - name: total_billed
+        description: Total billing amount for the patient.
+        tests:
+          - not_null
+      - name: total_paid
+        description: Total amount paid by or for the patient.
+        tests:
+          - not_null
+      - name: no_show_count
+        description: Count of appointments marked as no-shows.
+        tests:
+          - not_null
+      - name: first_appointment_date
+        description: Date of the patient's first appointment.
+        tests:
+          - not_null
+      - name: last_appointment_date
+        description: Date of the patient's most recent appointment.
+        tests:
+          - not_null
