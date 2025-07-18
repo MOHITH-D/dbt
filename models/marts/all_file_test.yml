@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: dim_doctors
+  - name: dim_doctor
     description: |
       This dimension table contains doctor details including their specialization, contact information, years of experience, and hospital branch.
     columns:
