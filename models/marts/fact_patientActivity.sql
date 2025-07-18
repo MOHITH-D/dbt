@@ -1,6 +1,7 @@
 {{
     config(
-        schema='marts'
+        schema='marts',
+        tags = 'patientActivity'
     )
 }}
 
