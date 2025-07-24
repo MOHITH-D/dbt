@@ -37,11 +37,8 @@ with source as (
         src.years_experience,
         src.hospital_branch,
         src.email,
- 
-        -- Keep existing created_at, fallback to new if not present
         coalesce(tgt.created_at, src.created_at) as created_at,
- 
-        -- Only update if actual changes
+
         case
             when tgt.doctor_id is not null and (
                 src.first_name <> tgt.first_name or
@@ -66,7 +63,6 @@ select * from final
  
 {% else %}
  
--- Full refresh
 select
     *,
     null as updated_at
