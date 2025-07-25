@@ -23,7 +23,7 @@ renamed as (
         years_experience,
         hospital_branch,
         email,
-        current_timestamp as created_at
+        created_at
         
     from source
 
