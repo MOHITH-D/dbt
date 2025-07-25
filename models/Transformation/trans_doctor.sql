@@ -21,5 +21,5 @@ select
         when email ilike concat('dr.', lower(first_name), '.', lower(last_name), '@hospital.com') then email
         else 'invalid_email'
     end as email,
-    current_timestamp as created_at
+    created_at
 from {{ ref('stg_raw__doctors') }}

@@ -22,8 +22,9 @@ renamed as (
         phone_number,
         years_experience,
         hospital_branch,
-        email
-
+        email,
+        current_timestamp as created_at
+        
     from source
 
 )

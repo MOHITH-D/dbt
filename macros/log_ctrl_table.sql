@@ -23,7 +23,8 @@
         '{{ run_started_at.strftime("%Y-%m-%d %H:%M:%S") }}',
         '{{ run_ended_at.strftime("%Y-%m-%d %H:%M:%S") }}',
         {{ run_duration }},
-        '{{ run_id }}'
+        '{{ run_id }}',
+
     );
  
 {% endmacro %}
@@ -48,7 +49,8 @@
             run_started_at,
             run_ended_at,
             run_duration,
-            run_id
+            run_id,
+            created_at
         )
         values (
             '{{ model_name }}',
@@ -56,7 +58,7 @@
             '{{ run_started_at }}',
             '{{ run_ended_at }}',
             {{ run_duration }},
-            '{{ run_id }}'
+            '{{ run_id }}',
         );
     {% endfor %}
  

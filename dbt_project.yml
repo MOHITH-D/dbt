@@ -39,9 +39,12 @@ models:
   my_new_project: 
     staging:
       schema: staging
+      materialized: 'table'
+    Transformation:
+      materialized: 'table'
     pre-hook: 
-      - "{{ ctrl_log_model() }}"
+      - "{{ auto_log_start() }}"
     post-hook:
-      - "{{ ctrl_log_results() }}"
+      - "{{ auto_log_completion()  }}"
 
   

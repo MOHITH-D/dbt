@@ -10,3 +10,8 @@ sources:
       - name: doctors
       - name: patients
       - name: treatments
+      - name: model_execution_log
+  - name: control
+    schema: test_cntrl_table
+    tables:
+      - name: model_execution_log
