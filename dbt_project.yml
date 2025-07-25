@@ -47,4 +47,6 @@ models:
     post-hook:
       - "{{ auto_log_completion()  }}"
 
-  
+on-run-end:
+  - "{{ log_failed_models() }}"
+

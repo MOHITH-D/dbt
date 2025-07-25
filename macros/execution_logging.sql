@@ -61,3 +61,12 @@
 {% macro auto_log_completion() %}
     {{ log_model_success(this.name) }}
 {% endmacro %}
+
+
+{% macro log_failed_models() %}
+    {% if execute %}
+        {% for result in results if result.status == 'error' %}
+            {% do log_model_failure(result.node.name) %}
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
