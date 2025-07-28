@@ -1,11 +1,10 @@
 {% macro log_model_start(model_name) %}
-    {% set now = modules.datetime.datetime.now().isoformat() %}
     {% set sql %}
         INSERT INTO {{ source('control', 'model_execution_log') }} (
             model_name, status, started_at, created_at
         )
         VALUES (
-            '{{ model_name }}', 'RUNNING', '{{ now }}', '{{ now }}'
+            '{{ model_name }}', 'RUNNING', current_timestamp, current_timestamp
         )
     {% endset %}
     {% if execute %}
@@ -14,12 +13,11 @@
 {% endmacro %}
 
 {% macro log_model_success(model_name) %}
-    {% set now = modules.datetime.datetime.now().isoformat() %}
     {% set sql %}
         UPDATE {{ source('control', 'model_execution_log') }}
         SET status = 'SUCCESS',
-            ended_at = '{{ now }}',
-            run_duration = TIMESTAMPDIFF(second, started_at, '{{ now }}'::timestamp)
+            ended_at = current_timestamp,
+            run_duration = TIMESTAMPDIFF(second, started_at, current_timestamp)
         WHERE model_name = '{{ model_name }}'
           AND status = 'RUNNING'
           AND started_at = (
@@ -34,12 +32,11 @@
 {% endmacro %}
 
 {% macro log_model_failure(model_name) %}
-    {% set now = modules.datetime.datetime.now().isoformat() %}
     {% set sql %}
         UPDATE {{ source('control', 'model_execution_log') }}
         SET status = 'FAILED',
-            ended_at = '{{ now }}',
-            run_duration = TIMESTAMPDIFF(second, started_at, '{{ now }}'::timestamp)
+            ended_at = current_timestamp,
+            run_duration = TIMESTAMPDIFF(second, started_at, current_timestamp)
         WHERE model_name = '{{ model_name }}'
           AND status = 'RUNNING'
           AND started_at = (
