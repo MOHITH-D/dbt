@@ -19,11 +19,11 @@ with source as (
         email,
         created_at
     from {{ ref('trans_doctor') }}
-)
+),
  
 {% if is_incremental() %}
  
-, target as (
+target as (
     select * from {{ this }}
 )
  
