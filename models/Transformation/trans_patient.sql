@@ -8,9 +8,9 @@
 with base as (
     select
         concat(
-            coalesce(cast(patient_id as string), '_NULL_'),
-            coalesce(cast(contact_number as string), '_NULL_'),
-            coalesce(cast(insurance_number as string), '_NULL_')
+            coalesce(cast(patient_id as string), 'NULL'),
+            coalesce(cast(contact_number as string), 'NULL'),
+            coalesce(cast(insurance_number as string), 'NULL')
         ) as sug_key_patient,
 
         patient_id,

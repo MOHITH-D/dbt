@@ -41,17 +41,17 @@ C as (
 
 Final as (
     select
-        c.treatment_type,
-        c.description,
-        c.cost_range,
-        c.tre,
-        c.rn,
-        a.treatment_id,
-        a.created_at
-    from C c
-    join A a
-      on a.treatment_type = c.treatment_type
-     and a.description = c.description
+        C.treatment_type,
+        C.description,
+        C.cost_range,
+        C.tre,
+        C.rn,
+        A.treatment_id,
+        A.created_at
+    from C 
+    join A 
+      on A.treatment_type = C.treatment_type
+     and A.description = C.description
 )
 
 select
