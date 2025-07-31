@@ -127,10 +127,6 @@ models:
         description: Range of costs for the treatment in the format "min-max".
         tests:
           - not_null
-      - name: last_updated
-        description: Timestamp of the latest update for the treatment type.
-        tests:
-          - not_null
 
   - name: fact_appointment
     description: |

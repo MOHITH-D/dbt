@@ -20,7 +20,8 @@ renamed as (
         treatment_type,
         description,
         cost,
-        treatment_date
+        treatment_date,
+        created_at
 
     from source
 
