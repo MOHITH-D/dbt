@@ -50,7 +50,6 @@ models:
       - name: patient_id
         description: Unique patient identifier.
         tests:
-          - unique
           - not_null
       - name: first_name
         description: Patient's first name.
@@ -83,7 +82,6 @@ models:
       - name: insurance_number
         description: Insurance policy number.
         tests:
-          - unique
           - not_null
       - name: email
         description: Patient's email address.

@@ -2,7 +2,7 @@
 {{
   config(
     schema='snapshot',
-    unique_key='sug_key_patient',
+    unique_key='patient_id',
     strategy='check',
     check_cols=['contact_number', 'insurance_provider'],
     tags = 'patients'
