@@ -7,12 +7,7 @@
 
 with base as (
     select
-        concat(
-            coalesce(cast(patient_id as string), 'NULL'),
-            coalesce(cast(contact_number as string), 'NULL'),
-            coalesce(cast(insurance_number as string), 'NULL')
-        ) as sug_key_patient,
-
+        ROW_NUMBER() OVER (ORDER BY patient_id, first_name) AS sug_key_patient,
         patient_id,
         first_name,
         last_name,

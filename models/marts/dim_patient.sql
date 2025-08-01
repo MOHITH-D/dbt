@@ -2,7 +2,7 @@
     config(
         schema='marts',
         materialized='incremental',
-        unique_key='patient_id',
+        unique_key='sug_key_patient',
         tags = 'patients'
     )
 }}
