@@ -20,8 +20,8 @@ with pat as(
         insurance_number,
         email,
         registration_date,
-        current_date as effective_start_date,
-        NULL as effective_end_date,
+        dbt_valid_from as effective_start_date,
+        dbt_valid_to as effective_end_date,
         case 
             when effective_end_date is null then 'Y'
             else 'N'
@@ -29,5 +29,6 @@ with pat as(
         from {{ ref('snap_patients')}}
 )
 select * from pat
+
 
 
